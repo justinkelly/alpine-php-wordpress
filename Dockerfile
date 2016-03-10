@@ -23,6 +23,7 @@ RUN apk update \
 RUN rm -rf /var/cache/apk/*
 
 ENV TERM="xterm" \
+    NGINX_PORT="80" \
     DB_HOST="172.17.0.1" \
     DB_NAME="" \
     DB_USER=""\
@@ -40,7 +41,7 @@ RUN chmod +x /run.sh
 
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && chmod +x wp-cli.phar && mv wp-cli.phar /usr/bin/wp-cli
 
-EXPOSE 80
+EXPOSE ${NGINX_PORT}
 VOLUME ["/DATA"]
 
 CMD ["/run.sh"]
